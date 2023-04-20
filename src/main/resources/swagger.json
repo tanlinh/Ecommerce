@@ -1,0 +1,28 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sample API",
+    "description": "This is a sample API.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/hello": {
+      "get": {
+        "description": "Returns a hello world message.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Hello, world!"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

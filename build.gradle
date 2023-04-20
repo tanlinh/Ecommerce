@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+    }
+}
+plugins {
+    id 'java'
+    id 'cz.alenkacz.gradle.jsonvalidator' version '1.2.1'
+    id 'groovy'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+	implementation group: 'org.everit.json', name: 'org.everit.json.schema', version:'1.5.1'
+}
+
+import cz.alenkacz.gradle.jsonvalidator.ValidateJsonTask
+
+task validateCustomJson(type: ValidateJsonTask) {
+    targetJsonFile  = file("$rootDir/src/main/resources/swagger.json")
+    jsonSchema = file("$rootDir/src/main/resources/schema.json")
+
+}
+
+//compileGroovy.dependsOn('validateCustomJson')
+
+//compileGroovy.dependsOn('validateCustomJson')
+//task convertYamlToXml(type: JavaExec) {
+//	main = 'com.example.demo.ConvertYamlToXml'
+//	classpath = sourceSets.main.runtimeClasspath
+//}
+//assemble.dependsOn(convertYamlToXml)
+
+//compileJava.dependsOn convertYamlToXml
+
+//tasks.withType(JavaExec) {
+//	doFirst {
+//		systemProperties = System.getProperties()
+//		systemProperties.setProperty("javax.net.ssl.trustStore", "D:\\demo\\src\\main\\resources\\cert.cer")
+//		systemProperties.setProperty("javax.net.ssl.trustStorePassword", "changeit")
+//	}
+//}
+

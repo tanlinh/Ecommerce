@@ -1,0 +1,17 @@
+openapi: 3.0.1
+info:
+  title: swagger
+  version: "1.0"
+paths:
+  /swagger/demo-0.0.yml:
+    get:
+      tags:
+        - openapi
+      description: returns the OpenAPI YAML file describing the API
+      operationId: swagger
+      parameters: []
+      responses:
+        "200":
+          description: OpenAPI YAML file describing the API
+          content:
+            text/plain: {}
