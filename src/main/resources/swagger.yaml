@@ -1,17 +1,20 @@
 openapi: 3.0.1
 info:
-  title: swagger
-  version: "1.0"
+  title: My API
+  description: A sample API for testing purposes
+  version: 1.0.0
 paths:
-  /swagger/demo-0.0.yml:
+  /hello:
     get:
-      tags:
-        - openapi
-      description: returns the OpenAPI YAML file describing the API
-      operationId: swagger
-      parameters: []
+      summary: Get a greeting message
       responses:
-        "200":
-          description: OpenAPI YAML file describing the API
+        200:
+          description: OK
           content:
-            text/plain: {}
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Hello, world!

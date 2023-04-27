@@ -1,50 +1,33 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-    dependencies {
-    }
-}
 plugins {
-    id 'java'
-    id 'cz.alenkacz.gradle.jsonvalidator' version '1.2.1'
-    id 'groovy'
+	id 'java'
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'org.openapi.generator' version '6.1.0'
 }
 
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
 repositories {
-    mavenCentral()
-    jcenter()
+	mavenCentral()
 }
 
 dependencies {
-	implementation group: 'org.everit.json', name: 'org.everit.json.schema', version:'1.5.1'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+	compileOnly 'org.projectlombok:lombok:1.18.26'
+	annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc:12.2.0.jre8'
 }
 
-import cz.alenkacz.gradle.jsonvalidator.ValidateJsonTask
-
-task validateCustomJson(type: ValidateJsonTask) {
-    targetJsonFile  = file("$rootDir/src/main/resources/swagger.json")
-    jsonSchema = file("$rootDir/src/main/resources/schema.json")
-
+tasks.named('test') {
+	useJUnitPlatform()
 }
-
-//compileGroovy.dependsOn('validateCustomJson')
-
-//compileGroovy.dependsOn('validateCustomJson')
-//task convertYamlToXml(type: JavaExec) {
-//	main = 'com.example.demo.ConvertYamlToXml'
-//	classpath = sourceSets.main.runtimeClasspath
-//}
-//assemble.dependsOn(convertYamlToXml)
-
-//compileJava.dependsOn convertYamlToXml
-
-//tasks.withType(JavaExec) {
-//	doFirst {
-//		systemProperties = System.getProperties()
-//		systemProperties.setProperty("javax.net.ssl.trustStore", "D:\\demo\\src\\main\\resources\\cert.cer")
-//		systemProperties.setProperty("javax.net.ssl.trustStorePassword", "changeit")
-//	}
-//}
-
