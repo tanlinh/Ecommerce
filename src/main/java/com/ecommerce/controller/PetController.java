@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PetController {
-    @GetMapping("/hello")
+    @GetMapping("")
     public String listPets() {
         return "[]";
     }

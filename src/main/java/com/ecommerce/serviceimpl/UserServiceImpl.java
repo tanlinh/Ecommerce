@@ -4,18 +4,22 @@ import com.ecommerce.dto.request.RegistrationRequest;
 import com.ecommerce.entity.User;
 import com.ecommerce.repository.UserRepository;
 import com.ecommerce.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public User getUserById(Long id) {
@@ -23,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 

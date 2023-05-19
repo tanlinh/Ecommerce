@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
@@ -58,8 +59,8 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody RegistrationRequest registrationRequest) {
-        User existingUser = userService.getUserByUsername(registrationRequest.getUsername());
-        if (existingUser != null) {
+        Optional<User> existingUser = userService.getUserByUsername(registrationRequest.getUsername());
+        if (existingUser.isEmpty()) {
             return ResponseEntity.badRequest().body("Username already exists");
         }
         userService.register(registrationRequest);
@@ -69,5 +70,17 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
             return null;
+    }
+
+    @GetMapping("/admin")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String adminOnly() {
+        return "This is an admin-only endpoint.";
+    }
+
+    @GetMapping("/user")
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String userOnly() {
+        return "This is a user-only endpoint.";
     }
 }

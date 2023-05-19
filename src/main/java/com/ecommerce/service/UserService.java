@@ -3,11 +3,13 @@ package com.ecommerce.service;
 import com.ecommerce.dto.request.RegistrationRequest;
 import com.ecommerce.entity.User;
 
+import java.util.Optional;
+
 public interface UserService {
 
     User getUserById(Long id);
 
-    User getUserByUsername(String username);
+    Optional<User> getUserByUsername(String username);
 
     User addUser(User user);
 

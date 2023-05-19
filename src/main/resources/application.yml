@@ -1,0 +1,68 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    url: jdbc:sqlserver://${DB_HOST:localhost}:${DB_PORT:1433};databaseName=${DB_NAME:commerce};encrypt=true;trustServerCertificate=true;
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: sapassword
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServerDialect
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: Iv1.82f341b43c737737
+            clientSecret: 02e6355878121da3d01b0e8a9905bd508b6b431f
+#          google:
+#            clientId: 700086744673-keplb3hc6ere9uiqddg4aleho4i08g37.apps.googleusercontent.com
+#            clientSecret: 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
+          azure:
+            client-id: 7e849490-a624-404c-b1d1-82c18f48d187
+            client-secret: e08ab669-e798-4853-93dd-29c374a33d3f
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/7e849490-a624-404c-b1d1-82c18f48d187
+            scope:
+              - openid
+              - profile
+              - email
+              - user.read
+        provider:
+          azure:
+            authorization-uri: https://login.microsoftonline.com/24caf169-ad1c-4c87-ac3c-e751e1b4655a/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/24caf169-ad1c-4c87-ac3c-e751e1b4655a/oauth2/v2.0/token
+            jwk-set-uri: https://login.microsoftonline.com/24caf169-ad1c-4c87-ac3c-e751e1b4655a/discovery/v2.0/keys
+            user-info-uri: https://graph.microsoft.com/v1.0/me
+            user-name-attribute: displayName
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          azure:
+#            client-id: 7e849490-a624-404c-b1d1-82c18f48d187
+#            client-secret: e08ab669-e798-4853-93dd-29c374a33d3f
+#            authorization-grant-type: authorization_code
+#            redirect-uri: http://localhost:8080/login/oauth2/code/7e849490-a624-404c-b1d1-82c18f48d187
+#            scope:
+#              - openid
+#              - profile
+#              - email
+#              - user.read
+#        provider:
+#          azure:
+#            authorization-uri: https://login.microsoftonline.com/24caf169-ad1c-4c87-ac3c-e751e1b4655a/oauth2/v2.0/authorize
+#            token-uri: https://login.microsoftonline.com/24caf169-ad1c-4c87-ac3c-e751e1b4655a/oauth2/v2.0/token
+#            jwk-set-uri: https://login.microsoftonline.com/24caf169-ad1c-4c87-ac3c-e751e1b4655a/discovery/v2.0/keys
+#            user-info-uri: https://graph.microsoft.com/v1.0/me
+#            user-name-attribute: displayName
+#      resourceserver:
+#        jwt:
+#          issuer-uri: https://login.microsoftonline.com/24caf169-ad1c-4c87-ac3c-e751e1b4655a/v2.0
+springdoc:
+  api-docs:
+    path: /swagger.yaml
+  swagger-ui:
+    url: swagger.yaml
